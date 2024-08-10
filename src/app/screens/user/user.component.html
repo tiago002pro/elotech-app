@@ -1,0 +1,32 @@
+<div class="app-user body-module">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Usuários</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Data de registro</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of userList">
+            <th>{{user.id}}</th>
+            <th>{{user.name}}</th>
+            <th>{{user.email}}</th>
+            <th>{{user.phone}}</th>
+            <th>{{user.registrationDate}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
