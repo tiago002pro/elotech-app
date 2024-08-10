@@ -1,0 +1,32 @@
+<div class="app-loan body-module">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Empréstimos</h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Livro</th>
+            <th scope="col">Data do empréstimo</th>
+            <th scope="col">Data de devolução</th>
+            <th scope="col">Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let loan of loanList">
+            <th>{{loan.id}}</th>
+            <th>{{loan.book.title}}</th>
+            <th>{{loan.loanDate}}</th>
+            <th>{{loan.returnDate}}</th>
+            <th>{{loan.status}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
