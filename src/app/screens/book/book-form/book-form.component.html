@@ -1,0 +1,58 @@
+<Form [formGroup]="form" class="app-user body-module">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Novo livro</h1>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Título</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Título..."
+      formControlName="title"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>Autor</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Autor..."
+      formControlName="author"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>ISBN</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="ISBN..."
+      formControlName="isbn"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>Date de publicação</label>
+    <input
+      type="date"
+      class="form-control"
+      formControlName="publicationDate"
+    >
+  </div>
+
+  <div class="form-group">
+    <label>Categoria</label>
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Categoria..."
+      formControlName="category"
+    >
+  </div>
+
+  <button type="submit" class="btn btn-primary" (click)="save()">Salvar</button>
+</Form>

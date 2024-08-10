@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -13,16 +14,21 @@ export class BookComponent implements OnInit {
   bookList:any[] = []
 
   constructor(
+    private route:Router,
     private bookService:BookService
   ) {}
 
-  ngOnInit() {
-    this.getAll()
+  ngOnInit():void {
+    this.__getAll()
   }
 
-  private getAll() {
+  private __getAll():void {
     this.bookService.getAll().subscribe((response:any) => {
       this.bookList = response
     })
+  }
+
+  public goToForm():void {
+    this.route.navigate(['book-form'])
   }
 }
