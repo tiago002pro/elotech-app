@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { LoanService } from '../../services/loan.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-loan',
@@ -13,6 +14,7 @@ export class LoanComponent implements OnInit {
   loanList:any[] = []
 
   constructor(
+    private route:Router,
     private loanService:LoanService
   ) {}
 
@@ -24,5 +26,9 @@ export class LoanComponent implements OnInit {
     this.loanService.getAll().subscribe((response:any) => {
       this.loanList = response
     })
+  }
+
+  public goToForm():void {
+    this.route.navigate(['loan-form'])
   }
 }
