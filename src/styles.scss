@@ -1,1 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #ff671f;
+  --secondary: #fcbf49;
+  --background: #0D0D0D
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden !important;
+}
+
+.body-module {
+  padding: 0px 100px;
+}
