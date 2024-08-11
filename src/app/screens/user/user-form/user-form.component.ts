@@ -15,28 +15,28 @@ import Swal from 'sweetalert2';
 })
 export class UserFormComponent implements OnInit {
   public form!:FormGroup
-  public user!:User
+  public entity!:User
 
   constructor(
     private route:Router,
     private activatedRoute:ActivatedRoute,
     private userService:UserService,
   ) {
-    this.__initializeUser()
+    this.__initializeEntity()
   }
 
   ngOnInit():void {
     this.__initializeForm({})
   }
 
-  private __initializeUser():void {
+  private __initializeEntity():void {
     if (this.activatedRoute.snapshot.params['id']) {
       this.userService.load(this.activatedRoute.snapshot.params['id']).subscribe((response:any) => {
-        this.user = response
+        this.entity = response
         this.__initializeForm(response)
       })
     } else {
-      this.user = {
+      this.entity = {
         name: '',
         email: '',
         registrationDate: new Date(),
@@ -44,7 +44,6 @@ export class UserFormComponent implements OnInit {
         loanList: [],
       }
     }
-
   }
 
   private __initializeForm(user:User):void {
@@ -60,14 +59,14 @@ export class UserFormComponent implements OnInit {
   }
 
   public save():void {
-    this.user = {
-      ...this.user,
+    this.entity = {
+      ...this.entity,
       name: this.form.get('name')?.value,
       email: this.form.get('email')?.value,
       phone: this.form.get('phone')?.value,
     }
     
-    this.userService.save(this.user).subscribe(() => {
+    this.userService.save(this.entity).subscribe(() => {
       Swal.fire({
         position: "center",
         icon: "success",
