@@ -1,4 +1,4 @@
-<div class="app-user body-module">
+<div class="app-book body-module">
   <div class="row">
     <div class="col-md-10">
       <h1>Livros</h1>
@@ -19,6 +19,7 @@
             <th scope="col">ISBN</th>
             <th scope="col">Data de publicação</th>
             <th scope="col">Categoria</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -29,6 +30,16 @@
             <th>{{book.isbn}}</th>
             <th>{{book.publicationDate}}</th>
             <th>{{book.category}}</th>
+            <th>
+              <div class="actions">
+                <a (click)="delete(book.id)">
+                  <i class="bi bi-trash3-fill"></i>
+                </a>
+                <a (click)="goToEdit(book.id)">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+              </div>
+            </th>
           </tr>
         </tbody>
       </table>

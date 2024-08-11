@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Book } from '../../../interface/book.interface';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../../../services/book.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
@@ -15,24 +15,44 @@ import { CommonModule } from '@angular/common';
 })
 export class BookFormComponent implements OnInit {
   public form!:FormGroup
-  public book!:Book
+  public entity!:Book
 
   constructor(
     private route:Router,
+    private activatedRoute:ActivatedRoute,
     private bookService:BookService,
-  ) { }
-
-  ngOnInit():void {
-    this.__initivalizeForm()
+  ) {
+    this.__initializeEntity()
   }
 
-  private __initivalizeForm():void {
+  ngOnInit():void {
+    this.__initializeForm({})
+  }
+
+  private __initializeEntity():void {
+    if (this.activatedRoute.snapshot.params['id']) {
+      this.bookService.load(this.activatedRoute.snapshot.params['id']).subscribe((response:any) => {
+        this.entity = response
+        this.__initializeForm(response)
+      })
+    } else {
+      this.entity = {
+        title: '',
+        author: '',
+        isbn: '',
+        publicationDate: new Date(),
+        category: '',
+      }
+    }
+  }
+
+  private __initializeForm(book:Book):void {
     this.form = new FormGroup({
-      title: new FormControl(''),
-      author: new FormControl(''),
-      isbn: new FormControl(''),
-      publicationDate: new FormControl(''),
-      category: new FormControl(''),
+      title: new FormControl(book ? book.title : ''),
+      author: new FormControl(book ? book.author : ''),
+      isbn: new FormControl(book ? book.isbn : ''),
+      publicationDate: new FormControl(book ? book.publicationDate : ''),
+      category: new FormControl(book ? book.category : ''),
     })
   }
 
@@ -41,7 +61,7 @@ export class BookFormComponent implements OnInit {
   }
 
   public save():void {
-    this.book = {
+    this.entity = {
       title: this.form.get('title')?.value,
       author: this.form.get('author')?.value,
       isbn: this.form.get('isbn')?.value,
@@ -49,7 +69,7 @@ export class BookFormComponent implements OnInit {
       category: this.form.get('category')?.value,
     }
     
-    this.bookService.save(this.book).subscribe(() => {
+    this.bookService.save(this.entity).subscribe(() => {
       Swal.fire({
         position: "center",
         icon: "success",

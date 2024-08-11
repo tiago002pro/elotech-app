@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../../services/book.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-book',
@@ -30,5 +31,35 @@ export class BookComponent implements OnInit {
 
   public goToForm():void {
     this.route.navigate(['book-form'])
+  }
+
+  public goToEdit(id:number):void {
+    this.route.navigate(['book-form', id])
+  }
+
+  public delete(id:number):void {
+    Swal.fire({
+      title: "Atenção!",
+      text: "Você tem certeza que deseja deletar este usuário?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, deletar!",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.bookService.delete(id).subscribe(() => {
+          Swal.fire({
+            title: "Deletado!",
+            text: "Usuário deletado com sucesso.",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.__getAll()
+        })
+      }
+    });
   }
 }
