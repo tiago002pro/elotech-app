@@ -3,7 +3,7 @@ import { User } from '../../../interface/user.interface';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../../services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -19,18 +19,39 @@ export class UserFormComponent implements OnInit {
 
   constructor(
     private route:Router,
+    private activatedRoute:ActivatedRoute,
     private userService:UserService,
-  ) { }
-
-  ngOnInit():void {
-    this.__initivalizeForm()
+  ) {
+    this.__initializeUser()
   }
 
-  private __initivalizeForm():void {
+  ngOnInit():void {
+    this.__initializeForm({})
+  }
+
+  private __initializeUser():void {
+    if (this.activatedRoute.snapshot.params['id']) {
+      this.userService.load(this.activatedRoute.snapshot.params['id']).subscribe((response:any) => {
+        this.user = response
+        this.__initializeForm(response)
+      })
+    } else {
+      this.user = {
+        name: '',
+        email: '',
+        registrationDate: new Date(),
+        phone: '',
+        loanList: [],
+      }
+    }
+
+  }
+
+  private __initializeForm(user:User):void {
     this.form = new FormGroup({
-      name: new FormControl(''),
-      email: new FormControl(''),
-      phone: new FormControl(''),
+      name: new FormControl(user ? user.name : ''),
+      email: new FormControl(user ? user.email : ''),
+      phone: new FormControl(user ? user.phone : ''),
     })
   }
 
@@ -40,11 +61,10 @@ export class UserFormComponent implements OnInit {
 
   public save():void {
     this.user = {
+      ...this.user,
       name: this.form.get('name')?.value,
       email: this.form.get('email')?.value,
-      registrationDate: new Date(),
       phone: this.form.get('phone')?.value,
-      loanList: []
     }
     
     this.userService.save(this.user).subscribe(() => {

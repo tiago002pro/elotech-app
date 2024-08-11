@@ -18,6 +18,7 @@
             <th scope="col">E-mail</th>
             <th scope="col">Phone</th>
             <th scope="col">Data de registro</th>
+            <th scope="col">Ações</th>
           </tr>
         </thead>
         <tbody>
@@ -27,6 +28,16 @@
             <th>{{user.email}}</th>
             <th>{{user.phone}}</th>
             <th>{{user.registrationDate}}</th>
+            <th>
+              <div class="actions">
+                <a (click)="delete(user.id)">
+                  <i class="bi bi-trash3-fill"></i>
+                </a>
+                <a (click)="goToEdit(user.id)">
+                  <i class="bi bi-pencil-square"></i>
+                </a>
+              </div>
+            </th>
           </tr>
         </tbody>
       </table>

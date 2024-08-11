@@ -10,6 +10,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/user', pathMatch: 'full' },
   { path: 'user', component: UserComponent },
   { path: 'user-form', component: UserFormComponent },
+  { path: 'user-form/:id', component: UserFormComponent },
   { path: 'book', component: BookComponent },
   { path: 'book-form', component: BookFormComponent },
   { path: 'loan', component: LoanComponent },

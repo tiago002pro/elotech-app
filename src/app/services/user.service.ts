@@ -21,4 +21,12 @@ export class UserService {
   save(user:User) {
     return this.http.post((this.url + this.root), user)
   }
+
+  delete(id:number) {
+    return this.http.delete((this.url + this.root + `/${id}`))
+  }
+
+  load(id:number):any {
+    return this.http.get((this.url + this.root + `/${id}`))
+  }
 }

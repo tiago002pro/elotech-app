@@ -1,0 +1,11 @@
+.app-user {
+  .actions {
+    display: flex;
+    justify-content: center;
+    
+    i {
+      color: var(--background);
+      cursor: pointer;
+    }
+  }
+}
