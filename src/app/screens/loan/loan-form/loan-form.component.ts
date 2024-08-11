@@ -5,6 +5,8 @@ import { Loan } from '../../../interface/loan.interface';
 import { Router } from '@angular/router';
 import { LoanService } from '../../../services/loan.service';
 import Swal from 'sweetalert2';
+import { BookService } from '../../../services/book.service';
+import { Book } from '../../../interface/book.interface';
 
 @Component({
   selector: 'app-loan-form',
@@ -16,13 +18,20 @@ import Swal from 'sweetalert2';
 export class LoanFormComponent implements OnInit {
   public form!:FormGroup
   public loan!:Loan
+  public books!:Book[]
 
   constructor(
     private route:Router,
     private loanService:LoanService,
+    private bookService:BookService,
   ) { }
 
   ngOnInit():void {
+    this.__initivalizeForm()
+    this.__getAllBooks()
+  }
+
+  private __initivalizeForm():void {
     this.form = new FormGroup({
       book: new FormControl(''),
       loanDate: new FormControl(''),
@@ -31,8 +40,14 @@ export class LoanFormComponent implements OnInit {
     })
   }
 
+  private __getAllBooks():void {
+    this.bookService.getAll().subscribe((response:any) => {
+      this.books = response
+    })
+  }
+
   public goToList():void {
-    this.route.navigate(['user'])
+    this.route.navigate(['loan'])
   }
 
   public save():void {
