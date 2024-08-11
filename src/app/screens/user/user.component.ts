@@ -53,7 +53,9 @@ export class UserComponent implements OnInit {
           Swal.fire({
             title: "Deletado!",
             text: "Usuário deletado com sucesso.",
-            icon: "success"
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500
           });
           this.__getAll()
         })
