@@ -23,6 +23,10 @@ export class UserFormComponent implements OnInit {
   ) { }
 
   ngOnInit():void {
+    this.__initivalizeForm()
+  }
+
+  private __initivalizeForm():void {
     this.form = new FormGroup({
       name: new FormControl(''),
       email: new FormControl(''),

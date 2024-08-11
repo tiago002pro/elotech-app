@@ -23,6 +23,10 @@ export class BookFormComponent implements OnInit {
   ) { }
 
   ngOnInit():void {
+    this.__initivalizeForm()
+  }
+
+  private __initivalizeForm():void {
     this.form = new FormGroup({
       title: new FormControl(''),
       author: new FormControl(''),
