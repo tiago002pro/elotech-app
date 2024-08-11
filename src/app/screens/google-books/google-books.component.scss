@@ -1,0 +1,30 @@
+.app-google-books {
+  .books-section {
+    overflow-y: auto;
+    height: calc(100vh - 50px);
+
+    .book {
+      display: flex;
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: gainsboro;
+      border-radius: 5px;
+
+      .img {
+        width: 128px;
+        height: 182px;
+        background-color: var(--background);
+      }
+
+      .description {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+
+        .title {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

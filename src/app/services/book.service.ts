@@ -21,4 +21,8 @@ export class BookService {
   save(book:Book) {
     return this.http.post((this.url + this.root), book)
   }
+
+  searchGoogleBooks(title:string) {
+    return this.http.get((this.url + this.root) + `/search-googke-books?title=${title}`)
+  }
 }

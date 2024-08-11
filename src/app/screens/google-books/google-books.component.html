@@ -1,0 +1,32 @@
+<div class="app-google-books body-module">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Busque livros do Google Books e adicione a sua biblioteca</h1>
+      <div class="form-group">
+        <label>Pesquisa</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="search" (ngModelChange)="onChange()"
+        >
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="books-section">
+        <div class="book" *ngFor="let book of bookList">
+          <div class="img-section" >
+            <img *ngIf="book.imgLink" class="img" src="{{book.imgLink}}" alt="{{book.title}}">
+            <div *ngIf="!book.imgLink" class="img"></div>
+          </div>
+            
+          <div class="description">
+            <label>Título: {{book.title}}</label>
+            <label>Autor: {{book.author}}</label>
+            <label>Data: {{book.publicationDate}}</label>
+            <label>ISBN: {{book.isbn}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

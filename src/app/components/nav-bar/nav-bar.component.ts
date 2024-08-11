@@ -23,7 +23,7 @@ export class NavBarComponent implements OnInit {
       { label: "Usuários", router: "user" },
       { label: "Livros", router: "book" },
       { label: "Empréstimos", router: "loan" },
-      { label: "Google Books", router: "" },
+      { label: "Google Books", router: "google-books" },
     ]
   }
 }
