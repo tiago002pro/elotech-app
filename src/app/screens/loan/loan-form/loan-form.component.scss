@@ -1,0 +1,31 @@
+.app-loan-form {
+  .books-section {
+    overflow-y: auto;
+    height: calc(100vh - 230px);
+    background-color: #fff;
+    box-shadow: 1px -1px 5px var(--gray);
+
+    .book {
+      display: flex;
+      padding: 20px;
+      border-bottom: 2px solid var(--gray);
+      cursor: pointer;
+
+      .img {
+        width: 128px;
+        height: 182px;
+        background-color: var(--secondary);
+      }
+
+      .description {
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+
+        .title {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

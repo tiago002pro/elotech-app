@@ -30,8 +30,8 @@ export class BookService {
     return this.http.get((this.url + this.root + `/${id}`))
   }
 
-  getAllBooksAvailable() {
-    return this.http.get((this.url + this.root) + `/books-available`)
+  getRecommendationBooks(userId:number) {
+    return this.http.get((this.url + this.root) + `/recommendation-books?userId=${userId}`)
   }
 
   searchGoogleBooks(title:string) {

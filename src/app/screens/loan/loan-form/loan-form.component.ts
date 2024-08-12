@@ -24,6 +24,7 @@ export class LoanFormComponent implements OnInit {
   public books!:Book[]
   public users!:User[]
   public statusTypes!:any[]
+  public recommendationBooks!:Book[]
 
   constructor(
     private route:Router,
@@ -44,11 +45,11 @@ export class LoanFormComponent implements OnInit {
 
   private __initivalizeForm():void {
     this.form = new FormGroup({
-      user: new FormControl({}),
-      book: new FormControl({}),
+      user: new FormControl(null),
+      book: new FormControl(null),
       loanDate: new FormControl(''),
       returnDate: new FormControl(''),
-      status: new FormControl(''),
+      status: new FormControl(null),
     })
   }
 
@@ -64,7 +65,7 @@ export class LoanFormComponent implements OnInit {
         book: {},
         loanDate: new Date(),
         returnDate: new Date(),
-        status: StatusLoan.OPEN,
+        status: '',
       }
     }
   }
@@ -109,6 +110,18 @@ export class LoanFormComponent implements OnInit {
     ]
   }
 
+  onChangeUser(user:User):void {
+    if (user && user.id) {
+      this.getRecommendationBooks(user.id)    
+    }
+  }
+
+  private getRecommendationBooks(userId:number):void {
+    this.bookService.getRecommendationBooks(userId).subscribe((response:any) => {
+      this.recommendationBooks = response
+    })
+  }
+
   public goToList():void {
     this.route.navigate(['loan'])
   }
@@ -143,5 +156,9 @@ export class LoanFormComponent implements OnInit {
         });
       },
     )
+  }
+
+  public selectBook(book:Book):void {
+    this.form.get('book')?.setValue(book)
   }
 }
