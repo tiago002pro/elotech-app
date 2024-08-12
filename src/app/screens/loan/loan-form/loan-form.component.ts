@@ -9,6 +9,7 @@ import { BookService } from '../../../services/book.service';
 import { Book } from '../../../interface/book.interface';
 import { User } from '../../../interface/user.interface';
 import { UserService } from '../../../services/user.service';
+import { StatusLoan } from '../../../enums/status-loan';
 
 @Component({
   selector: 'app-loan-form',
@@ -22,6 +23,7 @@ export class LoanFormComponent implements OnInit {
   public entity!:Loan
   public books!:Book[]
   public users!:User[]
+  public statusTypes!:any[]
 
   constructor(
     private route:Router,
@@ -37,6 +39,7 @@ export class LoanFormComponent implements OnInit {
     this.__initializeEntity()
     this.__getAllUsers()
     this.__getAllBooks()
+    this.__getAllStatus()
   }
 
   private __initivalizeForm():void {
@@ -61,7 +64,7 @@ export class LoanFormComponent implements OnInit {
         book: {},
         loanDate: new Date(),
         returnDate: new Date(),
-        status: '',
+        status: StatusLoan.OPEN,
       }
     }
   }
@@ -83,6 +86,10 @@ export class LoanFormComponent implements OnInit {
     return book1 && book2 && book1.id === book2.id;
   }
 
+  public compareStatus(status1:any, status2:any):any {
+    return status1 && status2 && status1.id === status2.id;
+  }
+
   private __getAllUsers():void {
     this.userService.getAll().subscribe((response:any) => {
       this.users = response
@@ -93,6 +100,13 @@ export class LoanFormComponent implements OnInit {
     this.bookService.getAll().subscribe((response:any) => {
       this.books = response
     })
+  }
+
+  private __getAllStatus():void {
+    this.statusTypes = [
+      { id: 'OPEN', label: StatusLoan.OPEN },
+      { id: 'FINISH', label: StatusLoan.FINISH },
+    ]
   }
 
   public goToList():void {
