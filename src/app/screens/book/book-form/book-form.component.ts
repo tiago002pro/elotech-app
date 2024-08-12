@@ -65,7 +65,7 @@ export class BookFormComponent implements OnInit {
   }
 
   public goToList():void {
-    this.route.navigate(['book'])
+    this.route.navigate(['book-list'])
   }
 
   public save():void {

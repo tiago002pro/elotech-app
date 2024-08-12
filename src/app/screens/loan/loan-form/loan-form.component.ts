@@ -123,7 +123,7 @@ export class LoanFormComponent implements OnInit {
   }
 
   public goToList():void {
-    this.route.navigate(['loan'])
+    this.route.navigate(['loan-list'])
   }
 
   public save():void {

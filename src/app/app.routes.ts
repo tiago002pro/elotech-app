@@ -8,7 +8,7 @@ import { LoanFormComponent } from './screens/loan/loan-form/loan-form.component'
 import { GoogleBooksComponent } from './screens/google-books/google-books.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/user', pathMatch: 'full' },
+  { path: '', redirectTo: '/user-list', pathMatch: 'full' },
   { path: 'user-list', component: UserListComponent },
   { path: 'user-form', component: UserFormComponent },
   { path: 'user-form/:id', component: UserFormComponent },

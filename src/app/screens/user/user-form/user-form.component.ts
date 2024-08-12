@@ -60,7 +60,7 @@ export class UserFormComponent implements OnInit {
   }
 
   public goToList():void {
-    this.route.navigate(['user'])
+    this.route.navigate(['user-list'])
   }
 
   public save():void {
