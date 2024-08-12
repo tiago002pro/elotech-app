@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { UserComponent } from './screens/user/user.component';
+import { UserListComponent } from './screens/user/user-list/user-list.component';
 import { BookListComponent } from './screens/book/book-list/book-list.component';
 import { LoanListComponent } from './screens/loan/loan-list/loan-list.component';
 import { UserFormComponent } from './screens/user/user-form/user-form.component';
@@ -9,7 +9,7 @@ import { GoogleBooksComponent } from './screens/google-books/google-books.compon
 
 export const routes: Routes = [
   { path: '', redirectTo: '/user', pathMatch: 'full' },
-  { path: 'user', component: UserComponent },
+  { path: 'user-list', component: UserListComponent },
   { path: 'user-form', component: UserFormComponent },
   { path: 'user-form/:id', component: UserFormComponent },
   { path: 'book-list', component: BookListComponent },

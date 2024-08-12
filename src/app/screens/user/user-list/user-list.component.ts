@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../services/user.service';
+import { UserService } from '../../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-user',
+  selector: 'app-user-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './user.component.html',
-  styleUrl: './user.component.scss'
+  templateUrl: './user-list.component.html',
+  styleUrl: './user-list.component.scss'
 })
-export class UserComponent implements OnInit {
+export class UserListComponent implements OnInit {
   userList:any[] = []
 
   constructor(
