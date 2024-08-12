@@ -22,18 +22,28 @@ export class BookFormComponent implements OnInit {
     private activatedRoute:ActivatedRoute,
     private bookService:BookService,
   ) {
-    this.__initializeEntity()
+    this.__initializeForm()
   }
 
   ngOnInit():void {
-    this.__initializeForm({})
+    this.__initializeEntity()
+  }
+
+  private __initializeForm():void {
+    this.form = new FormGroup({
+      title: new FormControl(''),
+      author: new FormControl(''),
+      isbn: new FormControl(''),
+      publicationDate: new FormControl(null),
+      category: new FormControl(''),
+    })
   }
 
   private __initializeEntity():void {
     if (this.activatedRoute.snapshot.params['id']) {
       this.bookService.load(this.activatedRoute.snapshot.params['id']).subscribe((response:any) => {
         this.entity = response
-        this.__initializeForm(response)
+        this.__setFormEntity(response)
       })
     } else {
       this.entity = {
@@ -46,14 +56,12 @@ export class BookFormComponent implements OnInit {
     }
   }
 
-  private __initializeForm(book:Book):void {
-    this.form = new FormGroup({
-      title: new FormControl(book ? book.title : ''),
-      author: new FormControl(book ? book.author : ''),
-      isbn: new FormControl(book ? book.isbn : ''),
-      publicationDate: new FormControl(book ? book.publicationDate : ''),
-      category: new FormControl(book ? book.category : ''),
-    })
+  private __setFormEntity(response:Book):void {
+    this.form.get('title')?.setValue(response.title)
+    this.form.get('author')?.setValue(response.author)
+    this.form.get('isbn')?.setValue(response.isbn)
+    this.form.get('publicationDate')?.setValue(response.publicationDate)
+    this.form.get('category')?.setValue(response.category)
   }
 
   public goToList():void {
@@ -62,6 +70,7 @@ export class BookFormComponent implements OnInit {
 
   public save():void {
     this.entity = {
+      ...this.entity,
       title: this.form.get('title')?.value,
       author: this.form.get('author')?.value,
       isbn: this.form.get('isbn')?.value,

@@ -31,4 +31,8 @@ export class LoanComponent implements OnInit {
   public goToForm():void {
     this.route.navigate(['loan-form'])
   }
+
+  public goToEdit(id:number):void {
+    this.route.navigate(['loan-form', id])
+  }
 }

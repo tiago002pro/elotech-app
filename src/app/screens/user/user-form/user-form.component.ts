@@ -22,18 +22,26 @@ export class UserFormComponent implements OnInit {
     private activatedRoute:ActivatedRoute,
     private userService:UserService,
   ) {
-    this.__initializeEntity()
+    this.__initializeForm()
   }
 
   ngOnInit():void {
-    this.__initializeForm({})
+    this.__initializeEntity()
+  }
+
+  private __initializeForm():void {
+    this.form = new FormGroup({
+      name: new FormControl(''),
+      email: new FormControl(''),
+      phone: new FormControl(''),
+    })
   }
 
   private __initializeEntity():void {
     if (this.activatedRoute.snapshot.params['id']) {
       this.userService.load(this.activatedRoute.snapshot.params['id']).subscribe((response:any) => {
         this.entity = response
-        this.__initializeForm(response)
+        this.__setFormEntity(response)
       })
     } else {
       this.entity = {
@@ -45,12 +53,10 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  private __initializeForm(user:User):void {
-    this.form = new FormGroup({
-      name: new FormControl(user ? user.name : ''),
-      email: new FormControl(user ? user.email : ''),
-      phone: new FormControl(user ? user.phone : ''),
-    })
+  private __setFormEntity(response:User):void {
+    this.form.get('name')?.setValue(response.name)
+    this.form.get('email')?.setValue(response.email)
+    this.form.get('phone')?.setValue(response.phone)
   }
 
   public goToList():void {

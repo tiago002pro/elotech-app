@@ -17,5 +17,6 @@ export const routes: Routes = [
   { path: 'book-form/:id', component: BookFormComponent },
   { path: 'loan', component: LoanComponent },
   { path: 'loan-form', component: LoanFormComponent },
+  { path: 'loan-form/:id', component: LoanFormComponent },
   { path: 'google-books', component: GoogleBooksComponent },
 ];

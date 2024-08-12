@@ -22,10 +22,6 @@ export class BookService {
     return this.http.post((this.url + this.root), book)
   }
 
-  searchGoogleBooks(title:string) {
-    return this.http.get((this.url + this.root) + `/search-googke-books?title=${title}`)
-  }
-
   delete(id:number) {
     return this.http.delete((this.url + this.root + `/${id}`))
   }

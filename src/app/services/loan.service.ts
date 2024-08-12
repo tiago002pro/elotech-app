@@ -21,4 +21,8 @@ export class LoanService {
   save(loan:Loan) {
     return this.http.post((this.url + this.root), loan)
   }
+
+  load(id:number):any {
+    return this.http.get((this.url + this.root + `/${id}`))
+  }
 }
