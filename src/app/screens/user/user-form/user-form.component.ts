@@ -41,7 +41,6 @@ export class UserFormComponent implements OnInit {
         email: '',
         registrationDate: new Date(),
         phone: '',
-        loanList: [],
       }
     }
   }

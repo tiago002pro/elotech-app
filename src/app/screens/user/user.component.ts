@@ -49,16 +49,27 @@ export class UserComponent implements OnInit {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.isConfirmed) {
-        this.userService.delete(id).subscribe(() => {
-          Swal.fire({
-            title: "Deletado!",
-            text: "Usuário deletado com sucesso.",
-            icon: "success",
-            showConfirmButton: false,
-            timer: 1500
-          });
-          this.__getAll()
-        })
+        this.userService.delete(id).subscribe(
+          data => {
+            Swal.fire({
+              title: "Deletado!",
+              text: "Usuário deletado com sucesso.",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            this.__getAll()
+          },
+          error => {
+            Swal.fire({
+              title: "Não foi possivel deletar!",
+              text: "Este usuário já foi vinculado a um empréstimo.",
+              icon: "error",
+              showConfirmButton: false,
+              timer: 2000
+            });
+          },
+        )
       }
     });
   }

@@ -7,6 +7,8 @@ import { LoanService } from '../../../services/loan.service';
 import Swal from 'sweetalert2';
 import { BookService } from '../../../services/book.service';
 import { Book } from '../../../interface/book.interface';
+import { User } from '../../../interface/user.interface';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-loan-form',
@@ -19,24 +21,34 @@ export class LoanFormComponent implements OnInit {
   public form!:FormGroup
   public loan!:Loan
   public books!:Book[]
+  public users!:User[]
 
   constructor(
     private route:Router,
     private loanService:LoanService,
+    private userService:UserService,
     private bookService:BookService,
   ) { }
 
   ngOnInit():void {
     this.__initivalizeForm()
+    this.__getAllUsers()
     this.__getAllBooks()
   }
 
   private __initivalizeForm():void {
     this.form = new FormGroup({
-      book: new FormControl(''),
+      user: new FormControl({}),
+      book: new FormControl({}),
       loanDate: new FormControl(''),
       returnDate: new FormControl(''),
       status: new FormControl(''),
+    })
+  }
+
+  private __getAllUsers():void {
+    this.userService.getAll().subscribe((response:any) => {
+      this.users = response
     })
   }
 
@@ -52,6 +64,7 @@ export class LoanFormComponent implements OnInit {
 
   public save():void {
     this.loan = {
+      user: this.form.get('user')?.value,
       book: this.form.get('book')?.value,
       loanDate: new Date(this.form.get('loanDate')?.value),
       returnDate: new Date(this.form.get('returnDate')?.value),
