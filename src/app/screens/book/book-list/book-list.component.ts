@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { BookService } from '../../services/book.service';
+import { BookService } from '../../../services/book.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-book',
+  selector: 'app-book-list',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './book.component.html',
-  styleUrl: './book.component.scss'
+  templateUrl: './book-list.component.html',
+  styleUrl: './book-list.component.scss'
 })
-export class BookComponent implements OnInit {
+export class BookListComponent implements OnInit {
   bookList:any[] = []
 
   constructor(

@@ -21,7 +21,7 @@ export class NavBarComponent implements OnInit {
   private __createNavigateTabs():void {
     this.tabsNavigate = [
       { label: "Usuários", router: "user" },
-      { label: "Livros", router: "book" },
+      { label: "Livros", router: "book-list" },
       { label: "Empréstimos", router: "loan" },
       { label: "Google Books", router: "google-books" },
     ]
