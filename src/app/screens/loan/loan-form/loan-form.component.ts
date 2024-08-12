@@ -123,15 +123,25 @@ export class LoanFormComponent implements OnInit {
       status: this.form.get('status')?.value,
     }
     
-    this.loanService.save(this.entity).subscribe(() => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Empréstimo registrado com sucesso!",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.goToList()
-    })
+    this.loanService.save(this.entity).subscribe(
+      (data) => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Empréstimo registrado com sucesso!",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.goToList()
+      },
+      error => {
+        Swal.fire({
+          title: error?.error?.message,
+          icon: "error",
+          showConfirmButton: false,
+          timer: 2000
+        });
+      },
+    )
   }
 }
