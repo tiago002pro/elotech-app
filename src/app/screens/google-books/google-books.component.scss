@@ -1,19 +1,51 @@
 .app-google-books {
+  .selected-book-section {
+    height: calc(100vh - 230px);
+    background-color: #fff;
+    box-shadow: 1px -1px 5px var(--gray);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .selected-book-list {  
+      padding: 20px;
+      overflow-y: auto;
+  
+      .selected-book {
+        background-color: gainsboro;
+        margin-bottom: 5px;
+        display: flex;
+        justify-content: space-between;
+        padding: 10px;
+        align-items: center;
+        border-radius: 5px;
+      }
+    }
+
+    .btn-save {
+      margin: 10px;
+      display: flex;
+      justify-content: center;
+    }
+  }
+
   .books-section {
     overflow-y: auto;
-    height: calc(100vh - 50px);
+    height: calc(100vh - 230px);
+    background-color: #fff;
+    box-shadow: 1px -1px 5px var(--gray);
 
     .book {
       display: flex;
-      margin-bottom: 20px;
       padding: 20px;
-      background-color: gainsboro;
-      border-radius: 5px;
+      border-bottom: 2px solid var(--gray);
+      cursor: pointer;
 
       .img {
         width: 128px;
         height: 182px;
-        background-color: var(--background);
+        background-color: var(--primary);
       }
 
       .description {

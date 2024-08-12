@@ -29,4 +29,16 @@ export class BookService {
   load(id:number):any {
     return this.http.get((this.url + this.root + `/${id}`))
   }
+
+  getAllBooksAvailable() {
+    return this.http.get((this.url + this.root) + `/books-available`)
+  }
+
+  searchGoogleBooks(title:string) {
+    return this.http.get((this.url + this.root) + `/search-googke-books?title=${title}`)
+  }
+
+  addBooksToLibrary(dto:any) {
+    return this.http.post((this.url + this.root) + `/add-book-list-to-library`, dto)
+  }
 }

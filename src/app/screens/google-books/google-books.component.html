@@ -1,19 +1,41 @@
 <div class="app-google-books body-module">
   <div class="row">
-    <div class="col-md-6">
-      <h1>Busque livros do Google Books e adicione a sua biblioteca</h1>
-      <div class="form-group">
-        <label>Pesquisa</label>
-        <input
-          type="text"
-          class="form-control"
-          [(ngModel)]="search" (ngModelChange)="onChange()"
-        >
+    <div class="col-md-12">
+      <div class="header">
+        <h3>Busque livros do Google Books e adicione a sua biblioteca</h3>
+        <div class="form-group">
+          <label>Pesquisa</label>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="search" (ngModelChange)="onChange()"
+          >
+        </div>
       </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="selected-book-section">
+        <div class="selected-book-list">
+          <div class="selected-book" *ngFor="let selectedBook of selectedBooks">
+            <label for="">{{selectedBook.title}}</label>
+            <button type="submit" class="btn btn-primary" (click)="removeBook(selectedBook)">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="btn-save">
+          <button type="submit" class="btn btn-primary" (click)="addBooksToLibrary()">
+            Adicionar a biblioteca
+          </button>
+        </div>
+      </div>
+      
     </div>
     <div class="col-md-6">
       <div class="books-section">
-        <div class="book" *ngFor="let book of bookList">
+        <div class="book" *ngFor="let book of bookList" (click)="selectBook(book)">
           <div class="img-section" >
             <img *ngIf="book.imgLink" class="img" src="{{book.imgLink}}" alt="{{book.title}}">
             <div *ngIf="!book.imgLink" class="img"></div>
