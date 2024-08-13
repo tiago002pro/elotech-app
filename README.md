@@ -14,3 +14,4 @@ Gestão de Biblioteca com Recomendação de Livros.
 
 - cd projeto
 - npm i
+- npm start
