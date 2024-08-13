@@ -19,7 +19,11 @@ export class BookService {
   }
 
   save(book:Book) {
-    return this.http.post((this.url + this.root), book)
+    return this.http.post((this.url + this.root) + `/save`, book)
+  }
+
+  update(book:Book) {
+    return this.http.put((this.url + this.root) + `/update`, book)
   }
 
   delete(id:number) {

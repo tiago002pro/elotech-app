@@ -135,27 +135,47 @@ export class LoanFormComponent implements OnInit {
       returnDate: new Date(this.form.get('returnDate')?.value),
       status: this.form.get('status')?.value,
     }
-    
-    this.loanService.save(this.entity).subscribe(
-      (data) => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Empréstimo registrado com sucesso!",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        this.goToList()
-      },
-      error => {
-        Swal.fire({
-          title: error?.error?.message,
-          icon: "error",
-          showConfirmButton: false,
-          timer: 2000
-        });
-      },
-    )
+
+    if (this.entity && this.entity.id) {
+      this.loanService.update(this.entity).subscribe(
+        (data) => {
+          this.__getSuccessRequestMessage("Empréstimo atualizado com sucesso!")
+          this.goToList()
+        },
+        error => {
+          this.__getErrorRequestMessage(error)
+        },
+      )
+    } else {
+      this.loanService.save(this.entity).subscribe(
+        (data) => {
+          this.__getSuccessRequestMessage("Empréstimo registrado com sucesso!")
+          this.goToList()
+        },
+        error => {
+          this.__getErrorRequestMessage(error)
+        },
+      )
+    }
+  }
+
+  private __getSuccessRequestMessage(title:string):void {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: title,
+      showConfirmButton: false,
+      timer: 1500
+    });
+  }
+
+  private __getErrorRequestMessage(error:any):void {
+    Swal.fire({
+      title: error?.error?.message,
+      icon: "error",
+      showConfirmButton: false,
+      timer: 2000
+    });
   }
 
   public selectBook(book:Book):void {

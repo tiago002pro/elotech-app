@@ -19,7 +19,11 @@ export class LoanService {
   }
 
   save(loan:Loan) {
-    return this.http.post((this.url + this.root), loan)
+    return this.http.post((this.url + this.root) + `/save`, loan)
+  }
+
+  update(loan:Loan) {
+    return this.http.put((this.url + this.root) + `/update`, loan)
   }
 
   load(id:number):any {

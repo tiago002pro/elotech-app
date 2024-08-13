@@ -77,16 +77,27 @@ export class BookFormComponent implements OnInit {
       publicationDate: new Date(this.form.get('publicationDate')?.value),
       category: this.form.get('category')?.value,
     }
-    
-    this.bookService.save(this.entity).subscribe(() => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Salvo com sucesso!",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.goToList()
-    })
+
+    if (this.entity && this.entity.id) {
+      this.bookService.update(this.entity).subscribe(() => {
+        this.__getSuccessRequestMessage("Atualizado com sucesso!")
+        this.goToList()
+      })
+    } else {
+      this.bookService.save(this.entity).subscribe(() => {
+        this.__getSuccessRequestMessage("Salvo com sucesso!")
+        this.goToList()
+      })
+    }
+  }
+
+  private __getSuccessRequestMessage(title:string):void {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: title,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 }

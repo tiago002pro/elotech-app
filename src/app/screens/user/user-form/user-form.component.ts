@@ -70,16 +70,27 @@ export class UserFormComponent implements OnInit {
       email: this.form.get('email')?.value,
       phone: this.form.get('phone')?.value,
     }
-    
-    this.userService.save(this.entity).subscribe(() => {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: "Salvo com sucesso!",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.goToList()
-    })
+
+    if (this.entity && this.entity.id) {
+      this.userService.update(this.entity).subscribe(() => {
+        this.__getSuccessRequestMessage("Atualizado com sucesso!")
+        this.goToList()
+      })
+    } else {
+      this.userService.save(this.entity).subscribe(() => {
+        this.__getSuccessRequestMessage("Salvo com sucesso!")
+        this.goToList()
+      })
+    }
+  }
+
+  private __getSuccessRequestMessage(title:string):void {
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: title,
+      showConfirmButton: false,
+      timer: 1500
+    });
   }
 }

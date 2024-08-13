@@ -19,7 +19,11 @@ export class UserService {
   }
 
   save(user:User) {
-    return this.http.post((this.url + this.root), user)
+    return this.http.post((this.url + this.root)  + `/save`, user)
+  }
+
+  update(user:User) {
+    return this.http.put((this.url + this.root) + `/update`, user)
   }
 
   delete(id:number) {
