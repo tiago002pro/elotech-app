@@ -11,5 +11,6 @@ Gestão de Biblioteca com Recomendação de Livros.
 1. Clone o repositório:
    ```bash
    git clone https://github.com/tiago002pro/elotech-app.git
-   cd projeto
-   npm i
+
+- cd projeto
+- npm i
